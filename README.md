@@ -3,6 +3,7 @@
 ## Docker 快速启动
 
 ```bash
+cp .env.example .env
 docker compose up -d
 ```
 
@@ -23,9 +24,20 @@ docker compose up -d
 
 ## 本地开发
 
+后端默认监听 3000，前端开发服务器会把 `/api` 请求代理到后端。后端本地启动需要可连接的 PostgreSQL；如果没有本机 PostgreSQL，请优先使用 Docker Compose 启动完整环境。
+
 ```bash
-cd backend && pip install -r requirements.txt && python manage.py runserver 0.0.0.0:3000
-cd frontend && npm install && npm run dev
+cd backend
+python3.12 -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+python manage.py runserver 0.0.0.0:3000
+```
+
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
 ## 技术栈
